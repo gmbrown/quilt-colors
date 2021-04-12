@@ -17,7 +17,8 @@ class House:
         if not wall_color in self.allowed_colors:
             raise InvalidHouseException(wall_color + " is not one of the allowed colors")
         if wall_color in self.color_set:
-                raise InvalidHouseException("a house must be all unique colors")
+            raise InvalidHouseException("a house must be all unique colors")
+        self.color_set.add(wall_color)
         self.wall_color = wall_color
 
     def set_door_color(self, door_color):
@@ -26,7 +27,8 @@ class House:
         if not door_color in self.allowed_colors:
             raise InvalidHouseException(door_color + " is not one of the allowed colors")
         if door_color in self.color_set:
-                raise InvalidHouseException("a house must be all unique colors")
+            raise InvalidHouseException("a house must be all unique colors")
+        self.color_set.add(door_color)
         self.door_color = door_color
 
     def set_roof_color(self, roof_color):
@@ -35,7 +37,8 @@ class House:
         if not roof_color in self.allowed_colors:
             raise InvalidHouseException(roof_color + " is not one of the allowed colors")
         if roof_color in self.color_set:
-                raise InvalidHouseException("a house must be all unique colors")
+            raise InvalidHouseException("a house must be all unique colors")
+        self.color_set.add(roof_color)
         self.roof_color = roof_color
 
     def set_sky_color(self, sky_color):
@@ -44,7 +47,8 @@ class House:
         if not sky_color in self.allowed_colors:
             raise InvalidHouseException(sky_color + " is not one of the allowed colors")
         if sky_color in self.color_set:
-                raise InvalidHouseException("a house must be all unique colors")
+            raise InvalidHouseException("a house must be all unique colors")
+        self.color_set.add(sky_color)
         self.sky_color = sky_color
 
     def is_complete(self):

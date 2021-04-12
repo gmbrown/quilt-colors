@@ -27,7 +27,13 @@ class Quilt:
         for neighbor in self.get_neighbors(row, column):
             for color in house.color_set:
                 if color in neighbor.color_set:
-                    raise InvalidQuiltException("Neighbooring houses cannot share any colors")
+                    raise InvalidQuiltException("Neighboring houses cannot share any colors")
+
+        if house.wall_color in self.get_all_wall_color_in_row(row):
+            raise InvalidQuiltException("Wall color must be unique within each row")
+
+        if house.wall_color in self.get_all_wall_color_in_column(column):
+            raise InvalidQuiltException("Wall color must be unique within each column")
 
         if house.sky_color in self.get_all_sky_color_in_row(row):
             raise InvalidQuiltException("Sky color must be unique within each row")
@@ -37,6 +43,20 @@ class Quilt:
 
         self.house_rows[row][column] = house
         self.house_color_order_set.add(str(house))
+
+    def get_all_wall_color_in_row(self, row):
+        wall_colors_in_row = set()
+        for house in self.house_rows[row]:
+            if house:
+                wall_colors_in_row.add(house.wall_color)
+        return wall_colors_in_row
+
+    def get_all_wall_color_in_column(self, column):
+        wall_colors_in_column = set()
+        for row in range(10):
+            if self.house_rows[row][column]:
+                wall_colors_in_column.add(self.house_rows[row][column].wall_color)
+        return wall_colors_in_column
 
     def get_all_sky_color_in_row(self, row):
         sky_colors_in_row = set()
