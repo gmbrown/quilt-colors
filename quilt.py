@@ -3,6 +3,7 @@ from house import House
 class Quilt:
     def __init__(self):
         self.house_rows = []
+        self.house_color_order_set = set()
         for i in range(10):
             row = []
             for i in range(10):
@@ -17,7 +18,11 @@ class Quilt:
         return True
 
     def set_house(self, row, column, house):
+        if str(house) in self.house_color_order_set:
+            raise Exception("All houses in the quilt must be unique")
+
         self.house_rows[row][column] = house
+        self.house_color_order_set.add(str(house))
 
     def __str__(self):
         print_str = ""
