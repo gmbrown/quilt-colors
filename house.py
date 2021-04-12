@@ -16,3 +16,6 @@ class House:
         self.door_color = door_color
         self.roof_color = roof_color
         self.sky_color = sky_color
+
+    def __str__(self):
+        return self.wall_color + self.door_color + self.roof_color + self.sky_color
