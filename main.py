@@ -20,14 +20,14 @@ def number_from_house(house):
 def next_house(house):
     number = number_from_house(house)
 
-    while(number < 10000):
+    while(True):
         number += 1
+        if number == 10000:
+            number = 0
         try:
             return house_from_number(number)
         except:
             pass
-
-    raise Exception("cannot find another valid house")
 
 q = Quilt()
 h = None
@@ -37,7 +37,13 @@ for row in range(10):
             h = House("A", "B", "C", "D")
         else:
             h = next_house(h)
-        q.set_house(row, column, h)
+
+        for i in range(10000):
+            try:
+                q.set_house(row, column, h)
+                break
+            except:
+                h = next_house(h)
 
 print(q.is_complete())
 
