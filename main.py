@@ -1,5 +1,5 @@
-from house import House
-from quilt import Quilt
+from house import House, InvalidHouseException
+from quilt import Quilt, InvalidQuiltException
 
 def house_from_number(number):
     wall_color = House.allowed_colors[int(number/1000) % 10]
@@ -26,24 +26,16 @@ def next_house(house):
             number = 0
         try:
             return house_from_number(number)
-        except:
+        except InvalidHouseException:
             pass
 
 q = Quilt()
 h = None
 for row in range(10):
     for column in range(10):
-        if not h:
-            h = House("A", "B", "C", "D")
-        else:
-            h = next_house(h)
-
-        for i in range(10000):
-            try:
-                q.set_house(row, column, h)
-                break
-            except:
-                h = next_house(h)
+        h = House()
+        h.set_sky_color(House.allowed_colors[(column + row) % 10])
+        q.set_house(row, column, h)
 
 print(q.is_complete())
 
